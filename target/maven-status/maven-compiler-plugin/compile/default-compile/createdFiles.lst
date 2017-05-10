@@ -1,0 +1,11 @@
+com\pms\model\User.class
+com\pms\controller\LoginController.class
+com\pms\repository\UserRepository.class
+com\pms\service\UserService.class
+com\pms\configuration\CustomizationBean.class
+com\pms\configuration\SecurityConfiguration.class
+com\pms\service\UserServiceImpl.class
+com\pms\repository\RoleRepository.class
+com\pms\configuration\WebMvcConfig.class
+com\pms\model\Role.class
+com\pms\ApplicationStart.class
