@@ -1,0 +1,73 @@
+<div th:fragment="admin_side_nav">
+
+ <!-- Side-Nav-->
+      <aside class="main-sidebar hidden-print">
+        <section class="sidebar">
+        
+          <!-- User Welcome-->
+          <div class="user-panel">
+            <div class="pull-left image"><img th:src="@{/images/admin.png}" class="img-circle"  alt="User Image"></div>
+            <div class="pull-left info">
+              <p>Welcome</p>
+              <p class="designation" th:utext="${userName}"></p>
+            </div>
+          </div>
+          <!-- // User Welcome-->
+          
+          <!-- Sidebar Menu-->
+          <ul class="sidebar-menu">
+            <li class="active"><a href="/admin/home"><i class="fa fa-home"></i><span>Home</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-edit"></i><span>Setup Forms</span><i class="fa fa-angle-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="/admin/t30004"><i class="fa fa-circle-o"></i>Generic Code Initialization</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Font Icons</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Cards</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Widgets</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-pie-chart"></i><span>Charts</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>Forms</span><i class="fa fa-angle-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Form Components</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Custom Components</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Form Samples</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Form Notifications</a></li>
+              </ul>
+            </li>
+            <li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Tables</span><i class="fa fa-angle-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Basic Tables</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Data Tables</a></li>
+              </ul>
+            </li>
+            <li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Pages</span><i class="fa fa-angle-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Login Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Lockscreen Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> User Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Invoice Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Calendar Page</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Mailbox</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Error Page</a></li>
+              </ul>
+            </li>
+            <li class="treeview"><a href="#"><i class="fa fa-share"></i><span>Multilevel Menu</span><i class="fa fa-angle-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li class="treeview"><a href="#"><i class="fa fa-circle-o"></i><span> Level One</span><i class="fa fa-angle-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i><span> Level Two</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          
+        </section>
+      </aside>
+      
+      <!-- end side bar -->
+   
+</div>
