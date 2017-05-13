@@ -9,8 +9,8 @@ public class CustomizationBean implements EmbeddedServletContainerCustomizer {
 	
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer container) {
-//		container.setPort(8000); //Production
-		container.setPort(8008); // Development
+//		container.setPort(4000); //Production
+		container.setPort(4004); // Development
 	}
 
 }

@@ -1,11 +1,16 @@
 com\pms\model\User.class
+com\pms\controller\T30004Controller.class
 com\pms\controller\LoginController.class
 com\pms\repository\UserRepository.class
 com\pms\service\UserService.class
 com\pms\configuration\CustomizationBean.class
 com\pms\configuration\SecurityConfiguration.class
+com\pms\repository\T30004Repository.class
+com\pms\service\T30004ServiceImpl.class
 com\pms\service\UserServiceImpl.class
+com\pms\service\T30004Service.class
 com\pms\repository\RoleRepository.class
+com\pms\model\T30004.class
 com\pms\configuration\WebMvcConfig.class
 com\pms\model\Role.class
 com\pms\ApplicationStart.class
