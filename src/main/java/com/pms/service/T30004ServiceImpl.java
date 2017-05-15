@@ -20,7 +20,7 @@ public class T30004ServiceImpl implements T30004Service{
 	}
 	
 	@Override
-	public List<T30004> findByTgencode(String tgencode) {
+	public T30004 findByTgencode(String tgencode) {
 		return t30004Repository.findByTgencode(tgencode);
 	}
 	

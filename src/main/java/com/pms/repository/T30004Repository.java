@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository("t30004Repository")
 public interface T30004Repository extends JpaRepository<T30004, Long> {
-	 List<T30004> findByTgencode(String tgencode);
+	 T30004 findByTgencode(String tgencode);
 	 
 	 @Query("select coalesce(max(tgencode), '0') from T30004")
 	 String getMaxTgencode();

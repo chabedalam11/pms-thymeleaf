@@ -52,17 +52,20 @@ public class T30007Controller {
 		System.out.println("manu code "+t30007.getTmanufacturercode());
 		//set entry user and date
 		if(t30007.getTmanufacturercode().equals("")){
-			System.out.println("come");
 			t30007.setT_entry_user(Integer.toString(user.getId()));
 			java.util.Date utilDate = new java.util.Date();
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		    t30007.setT_entry_date(sqlDate);
 		}else{
-			System.out.println("no");
-			t30007.setT_upd_user(Integer.toString(user.getId()));
-			java.util.Date utilDate = new java.util.Date();
+			//for update first take database object
+		    T30007 upt30007 = t30007Service.findByTmanufacturercode(t30007.getTmanufacturercode());
+		    upt30007.setT_upd_user(Integer.toString(user.getId()));
+		    java.util.Date utilDate = new java.util.Date();
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    t30007.setT_upd_date(sqlDate);
+		    upt30007.setT_upd_date(sqlDate);
+		    upt30007.setT_lang2_name(t30007.getT_lang2_name());
+		    
+		    t30007=upt30007;
 		}
 		
 		//save T30007

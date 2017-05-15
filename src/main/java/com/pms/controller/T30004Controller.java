@@ -56,10 +56,16 @@ public class T30004Controller {
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		    t30004.setT_entry_date(sqlDate);
 		}else{
-			t30004.setT_upd_user(Integer.toString(user.getId()));
-			java.util.Date utilDate = new java.util.Date();
+			
+		    //for update first take database object
+		    T30004 upt30004 = t30004Service.findByTgencode(t30004.getTgencode());
+		    upt30004.setT_upd_user(Integer.toString(user.getId()));
+		    java.util.Date utilDate = new java.util.Date();
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    t30004.setT_upd_date(sqlDate);
+		    upt30004.setT_upd_date(sqlDate);
+		    upt30004.setT_lang2_nam(t30004.getT_lang2_nam());
+		    upt30004.setT_active_flag(t30004.getT_active_flag());
+		    t30004=upt30004;
 		}
 		
 		//save T30004
@@ -71,7 +77,7 @@ public class T30004Controller {
 		return modelAndView;
 	}
 	
-	//save t30004
+		//delete t30004
 		@RequestMapping(value="/admin/deleteT30004", method = RequestMethod.POST)
 		public ModelAndView deleteT30004(@Valid T30004 t30004, BindingResult bindingResult){
 			//create ModelAndView for return

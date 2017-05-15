@@ -15,7 +15,7 @@ public class T30007ServiceImpl implements T30007Service{
 	private T30007Repository t30007Repository;
 	
 	@Override
-	public List<T30007> findByTmanufacturercode(String tmanufacturercode) {
+	public T30007 findByTmanufacturercode(String tmanufacturercode) {
 		return t30007Repository.findByTmanufacturercode(tmanufacturercode);
 	}
 
