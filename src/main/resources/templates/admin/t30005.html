@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- include header info from another page	 -->
+  <head lang="en" th:replace="fragments/adminheader :: adminheader"> </head>
+  <body class="sidebar-mini fixed">
+  
+  	<!-- this code for loader -->
+		<div class="se-pre-con"></div>
+	<!-- Ends -->
+  
+  
+    <div class="wrapper">
+    
+    <!-- include top nav from another page	 -->
+    <div lang="en" th:replace="fragments/admintopnav :: admintopnav"> </div>
+      
+    <!-- include side nav from another page	 -->
+    <div lang="en" th:replace="fragments/admin_side_nav :: admin_side_nav"> </div>
+      
+      
+      <div class="content-wrapper">
+      <!-- Page Title information -->
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-stethoscope"></i> Trade Code Initialization</h1>
+            <p>[T30005]</p>
+          </div>
+          
+         <div class="alert alert-success" th:if="${msg} != null">
+		  <p th:utext="${msg}"></p>
+		</div>
+          
+          <div>
+            <ul class="breadcrumb">
+              <li><a href="/admin/t30005"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li>Setup Forms</li>
+              <li><a href="#">Trade Code Initialization</a></li>
+            </ul>
+          </div>
+        </div>
+       <!-- Page Title information -->
+       
+        <!-- Page Body -->
+        <div class="row" id="formBody">
+        <!-- trade code form -->
+        <div class="col-md-4 col-md-offset-4">
+	        <div class="card">
+	          <div class="card-body">
+	          	<form autocomplete="off" action="#" th:action="@{/admin/saveT30005}"
+					th:object="${t30005}" method="post"  role="form">
+					
+					
+					<select class="form-inline"  id="generic" name="t_gen_code">
+					    <option value="0" selected="selected">Select Generic Code</option>
+					    <option th:each="t30004 : ${t30004}" th:value="${t30004.tgencode}" th:text="${t30004.t_lang2_nam}"></option>
+				    </select>
+				    
+				    <a id="link" href="/admin/findbygent30005?stringParam=t_gen_code"><i id="abc" class="fa fa-arrow-circle-down fa-2x text-success" aria-hidden="true" style="margin-left: 10px;"></i></a>
+				    
+				    <br/><br/>
+				    <select class="form-control"  id="manufacture" name="t_manuf_code">
+					    <option value="0" selected="selected">Select Manufacturer code</option>
+					    <option th:each="t30007 : ${t30007}" th:value="${t30007.tmanufacturercode}" th:text="${t30007.t_lang2_name}"></option>
+				    </select>
+				    
+				    <br/><br/>
+				    <div class="form-inline">
+						<input id="txtTradecode" type="text" name="ttradecode" class="form-control" placeholder="T_Code" readonly="readonly" style="float: left;width: 30%;margin-right: 2%">
+						<input id="txtTradeName" type="text" name="t_lang2_name" class="form-control" placeholder="type trade name" required="required" style="width: 68%">
+					</div>
+					
+					<div class="checkbox" style="text-align:center">
+						<input id="cbFlag" type="checkbox" name="t_active_flag" value="1" checked="checked"> active
+					</div>
+					<div style="text-align:center">
+						<button type="submit" class="btn btn-success">Save</button>
+						<button type="reset" class="btn btn-danger">Reset</button>
+					</div>
+				</form>
+	          </div>
+	         </div>
+        </div> 
+		<!-- //generic code form -->        
+        
+        <!-- generic data table-->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th>Trade Code</th>
+                      <th>Trade Name</th>
+                      <th>Generic Code</th>
+                      <th>Manufacture Code</th>
+                      <th>Active Flag</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="t30005 : ${t30005}">
+			        <td th:text="${t30005.ttradecode}"></td>
+			        <td th:text="${t30005.t_lang2_name}"></td>
+			        <td th:text="${t30005.t_gen_code}"></td>
+			        <td th:text="${t30005.t_manuf_code}"></td>
+			        
+			        <div th:if="${t30005.t_active_flag} == '1'">
+			        	<td style="text-align: center;">
+			        	<input type="checkbox" name="TActiveFlag" value="1" checked="checked" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        <div th:if="${t30005.t_active_flag} != '1'">
+			        	<td style="text-align: center;">
+			        	<input  type="checkbox" name="TActiveFlag" value="1" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        
+			        <td style="text-align: center;">
+			        <form autocomplete="off" action="#" th:action="@{/admin/deleteT30005}"
+					th:object="${t30005}" method="post"  role="form">
+						<input type="hidden" th:value="${t30005.ttradecode}" name="ttradecode" />
+						<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					</form>
+			        </td>
+				   </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         <!-- //generic data table-->
+        </div>
+       <!-- // Page Body -->
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+	    $(document).ready(function() {
+	    	//data table
+	        var table = $('#sampleTable').DataTable();
+	         
+	    	//table row click action
+	        $('#sampleTable tbody').on('dblclick', 'tr', function () {
+	        	//get table row value
+	            var data = table.row( this ).data();
+	            
+	            //get table cell value
+	            $('#txtTradecode').val(data[0]);
+	            $('#txtTradeName').val(data[1]);
+	            $('#generic').val(data[2]).change();
+	            $('#manufacture').val(data[3]).change();
+	            
+	            //check active flag check or not 
+	           if($(data[4]).is(':checked'))
+	        	    $('#cbFlag').prop('checked', true);    // checked 
+	             else
+	            	$('#cbFlag').prop('checked', false);  // unchecked 
+	            	
+           	   //go to top of the page
+	           $("html, body").animate({ scrollTop: 0 }, "slow");
+	            
+	        } );
+	    	
+	    	
+	        
+	       //var for auto search dropdown
+	        var country = [""];
+	        
+	      //auto search for generic
+			$("#generic").select2({
+			  data: country
+			});
+			
+			//auto search for manufac
+			$("#manufacture").select2({
+			  data: country
+			});
+			
+			
+			/* $("abc").click(function(){
+
+	            
+	        }); */
+			
+	    } );
+	    //==============// document ready ============
+	    
+	    
+	  //============not use==============	
+	   //dropdown change item
+	    $("#generic2").on('change', function() {
+	    	  //alert( this.value );
+	    	  $.ajax({
+	    	        method: "POST",
+	    	        url: "/admin/t30005",
+	    	        data : {
+	    	        	"stringParam" : this.value
+	    	        	/* ,"arrayParam" : [1, 2, 3, "test"].toString() */
+	    	        },
+	    	        success: function(status){
+	    	            if(status) {
+	    	                //here you check the response from your controller and add your business logic
+	    	            	location.reload();
+	    	            }
+	    	        }
+	    	    });
+	    	})
+	    $("#generic").on('change', function() {
+	    	  //alert( this.value );
+	    	var selectedid  = this.value;
+            $("#link").attr("href","/admin/findbygent30005?stringParam="+selectedid);  
+            //-----this will change href 
+            //<a href="/admin/findbygent30005?stringParam=t_gen_code">
+            
+            
+	    	})
+	    //============ //not use==============	
+	    	
+	    	
+	    	
+	    
+	    
+</script>
