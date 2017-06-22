@@ -43,7 +43,8 @@ public class T30005Controller {
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
 		modelAndView.addObject("t30004",t30004Service.findAll());
-		modelAndView.addObject("t30005",t30005Service.findAll());
+		modelAndView.addObject("t30005List",t30005Service.findAll());
+		modelAndView.addObject("t30005",new T30005());
 		modelAndView.addObject("t30007",t30007Service.findAll());
 		modelAndView.setViewName("admin/t30005");
 		return modelAndView;
@@ -64,7 +65,8 @@ public class T30005Controller {
 			User user = userService.findUserByEmail(auth.getName());
 			modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
 			modelAndView.addObject("t30004",t30004Service.findAll());
-			modelAndView.addObject("t30005",t30005Service.findByT_gen_code(stringParam));
+			modelAndView.addObject("t30005List",t30005Service.findByT_gen_code(stringParam));
+			modelAndView.addObject("t30005",new T30005());
 			modelAndView.addObject("t30007",t30007Service.findAll());
 			modelAndView.setViewName("admin/t30005");
 			return modelAndView;
@@ -87,33 +89,66 @@ public class T30005Controller {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		
-		//set entry user and date
-		if(t30005.getTtradecode().equals("")){
-			t30005.setT_entry_user(Integer.toString(user.getId()));
-			java.util.Date utilDate = new java.util.Date();
-		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    t30005.setT_entry_date(sqlDate);
+		System.out.println("gencode : "+t30005.getT_gen_code());
+		if (t30005.getT_gen_code().equals("0")) {
+			System.out.println("step 1");
+			bindingResult
+					.rejectValue("t_gen_code", "error.t30005",
+							"please select a generic code !!!");
+		}
+		if (bindingResult.hasErrors()) {
+			System.out.println("step 2");
+			//go to html page with parameter
+			modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
+			modelAndView.addObject("t30004",t30004Service.findAll());
+			modelAndView.addObject("t30005List",t30005Service.findAll());
+			modelAndView.addObject("t30007",t30007Service.findAll());
+			modelAndView.setViewName("admin/t30005");
 		}else{
 			
-		    //for update first take database object
-		    T30005 upt30005 = t30005Service.findByTtradecode(t30005.getTtradecode());
-		    upt30005.setT_upd_user(Integer.toString(user.getId()));
-		    java.util.Date utilDate = new java.util.Date();
-		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    upt30005.setT_upd_date(sqlDate);
-		    upt30005.setT_lang2_name(t30005.getT_lang2_name());
-		    upt30005.setT_active_flag(t30005.getT_active_flag());
-		    t30005=upt30005;
-		}
+			System.out.println("step 3");
+			//set entry user and date
+			if(t30005.getTtradecode().equals("")){
+				t30005.setT_entry_user(Integer.toString(user.getId()));
+				java.util.Date utilDate = new java.util.Date();
+			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			    t30005.setT_entry_date(sqlDate);
+			    modelAndView.addObject("msg",  "Save Successful");
+			}else{
+				
+			    //for update first take database object
+			    T30005 upt30005 = t30005Service.findByTtradecode(t30005.getTtradecode());
+			    upt30005.setT_upd_user(Integer.toString(user.getId()));
+			    java.util.Date utilDate = new java.util.Date();
+			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			    upt30005.setT_upd_date(sqlDate);
+			    upt30005.setT_gen_code(t30005.getT_gen_code());
+			    upt30005.setT_manuf_code(t30005.getT_manuf_code());
+			    upt30005.setT_lang2_name(t30005.getT_lang2_name());
+			    upt30005.setT_active_flag(t30005.getT_active_flag());
+			    t30005=upt30005;
+			    modelAndView.addObject("msg",  "Update Successful");
+			}
+			
+			//save T30005
+			t30005Service.saveT30005(t30005);
+			
+			//go to html page with parameter
+			modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
+			modelAndView.addObject("t30004",t30004Service.findAll());
+			modelAndView.addObject("t30005",new T30005());
+			modelAndView.addObject("t30005List",t30005Service.findByT_gen_code(t30005.getT_gen_code()));
+			modelAndView.addObject("t30007",t30007Service.findAll());
+			modelAndView.setViewName("admin/t30005");
+			
+			
+		} 
 		
-		//save T30005
-		t30005Service.saveT30005(t30005);
 		
-		//go to html page with parameter
-		modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
-		modelAndView.addObject("t30004",t30004Service.findAll());
-		modelAndView.addObject("t30007",t30007Service.findAll());
-		modelAndView.setViewName("admin/t30005");
+		
+		
+		
+		
 		return modelAndView;
 	}
 		
@@ -138,9 +173,10 @@ public class T30005Controller {
 			
 			//go to html page with parameter
 			modelAndView.addObject("userName",  user.getName()+ " " + user.getLastName());
-			modelAndView.addObject("msg",  "Delete Successfull");
+			modelAndView.addObject("msg",  "Delete Successful");
 			modelAndView.addObject("t30004",t30004Service.findAll());
-			modelAndView.addObject("t30005",t30005Service.findAll());
+			modelAndView.addObject("t30005List",t30005Service.findAll());
+			modelAndView.addObject("t30005",new T30005());
 			modelAndView.addObject("t30007",t30007Service.findAll());
 			modelAndView.setViewName("admin/t30005");
 			return modelAndView;

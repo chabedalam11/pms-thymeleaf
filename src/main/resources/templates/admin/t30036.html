@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- include header info from another page	 -->
+  <head lang="en" th:replace="fragments/adminheader :: adminheader"> </head>
+  <body class="sidebar-mini fixed">
+  
+  	<!-- this code for loader -->
+		<div class="se-pre-con"></div>
+	<!-- Ends -->
+  
+  
+    <div class="wrapper">
+    
+    <!-- include top nav from another page	 -->
+    <div lang="en" th:replace="fragments/admintopnav :: admintopnav"> </div>
+      
+    <!-- include side nav from another page	 -->
+    <div lang="en" th:replace="fragments/admin_side_nav :: admin_side_nav"> </div>
+      
+      
+      <div class="content-wrapper">
+      <!-- Page Title information -->
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-stethoscope"></i> Unit Measurement Code Initialization</h1>
+            <p>[T30036]</p>
+          </div>
+          <div>
+            <ul class="breadcrumb">
+           	  <li><a href="/admin/t30036"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li>Setup Forms</li>
+              <li><a href="#">Unit Measurement Code Initialization</a></li>
+            </ul>
+          </div>
+        </div>
+       <!-- Page Title information -->
+       
+        <!-- Page Body -->
+        <div class="row" id="formBody">
+        <!-- drug form code form -->
+        <div class="col-md-4 col-md-offset-4">
+	        <div class="card">
+	          <div class="card-body">
+	          	<form autocomplete="off" action="#" th:action="@{/admin/saveT30036}"
+					th:object="${t30036}" method="post"  role="form">
+					<div class="form-group">
+						<input id="txtFormcode" type="text" name="tum" class="form-control" placeholder="UM Code" readonly="readonly">
+						<input id="txtFormName" type="text" name="t_lang2_name" class="form-control" placeholder="type UM name" required="required">
+					</div>
+					<!-- <div class="checkbox" style="text-align:center">
+						<input id="cbFlag" type="checkbox" name="t_active_flag" value="1" checked="checked"> active
+					</div> -->
+					<div style="text-align:center">
+						<button type="submit" class="btn btn-success">Save</button>
+						<button type="reset" class="btn btn-danger">Reset</button>
+					</div>
+				</form>
+	          </div>
+	         </div>
+        </div> 
+		<!-- //generic code form -->        
+        
+        <!-- generic data table-->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th>UM Code</th>
+                      <th>UM Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="t30036 : ${t30036}">
+			        <td th:text="${t30036.tum}"></td>
+			        <td th:text="${t30036.t_lang2_name}"></td>
+			        
+			        <td style="text-align: center;">
+			        <form autocomplete="off" action="#" th:action="@{/admin/deleteT30036}"
+					th:object="${t30036}" method="post"  role="form">
+						<input type="hidden" th:value="${t30036.tum}" name="tum" />
+						<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					</form>
+			        </td>
+				   </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         <!-- //drug form data table-->
+        </div>
+       <!-- // Page Body -->
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+	    $(document).ready(function() {
+	        var table = $('#sampleTable').DataTable();
+	         
+	        $('#sampleTable tbody').on('dblclick', 'tr', function () {
+	        	//get table row value
+	            var data = table.row( this ).data();
+	            
+	            //get table cell value
+	            $('#txtFormcode').val(data[0]);
+	            $('#txtFormName').val(data[1]);
+	            
+	            //check active flag check or not 
+	           /* if($(data[2]).is(':checked'))
+	        	    $('#cbFlag').prop('checked', true);    // checked 
+	             else
+	            	$('#cbFlag').prop('checked', false);  // unchecked 
+	            	 */
+           	   //go to top of the page
+	           $("html, body").animate({ scrollTop: 0 }, "slow");
+	            
+	        } );
+	    } );
+</script>

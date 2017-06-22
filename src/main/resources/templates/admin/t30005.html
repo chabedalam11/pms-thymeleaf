@@ -50,15 +50,14 @@
 	        <div class="card">
 	          <div class="card-body">
 	          	<form autocomplete="off" action="#" th:action="@{/admin/saveT30005}"
-					th:object="${t30005}" method="post"  role="form">
+					th:object="${t30005}" method="post"  role="form"> <!-- onsubmit="return t30005validate()" -->
 					
-					
-					<select class="form-inline"  id="generic" name="t_gen_code">
+					<select class="form-inline"  id="generic" name="t_gen_code" style="width: 87%">
 					    <option value="0" selected="selected">Select Generic Code</option>
 					    <option th:each="t30004 : ${t30004}" th:value="${t30004.tgencode}" th:text="${t30004.t_lang2_nam}"></option>
 				    </select>
 				    
-				    <a id="link" href="/admin/findbygent30005?stringParam=t_gen_code"><i id="abc" class="fa fa-arrow-circle-down fa-2x text-success" aria-hidden="true" style="margin-left: 10px;"></i></a>
+				    <a id="link" href="/admin/findbygent30005?stringParam=t_gen_code" style="width: 10%;margin-top: 20px"><i id="abc" class="fa fa-arrow-circle-down fa-2x text-success" aria-hidden="true" ></i></a>
 				    
 				    <br/><br/>
 				    <select class="form-control"  id="manufacture" name="t_manuf_code">
@@ -75,6 +74,7 @@
 					<div class="checkbox" style="text-align:center">
 						<input id="cbFlag" type="checkbox" name="t_active_flag" value="1" checked="checked"> active
 					</div>
+					 <label style="text-align: center;color: red;"	th:if="${#fields.hasErrors('t_gen_code')}" th:errors="*{t_gen_code}"></label><br/>
 					<div style="text-align:center">
 						<button type="submit" class="btn btn-success">Save</button>
 						<button type="reset" class="btn btn-danger">Reset</button>
@@ -101,7 +101,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="t30005 : ${t30005}">
+                  <tr th:each="t30005 : ${t30005List}">
 			        <td th:text="${t30005.ttradecode}"></td>
 			        <td th:text="${t30005.t_lang2_name}"></td>
 			        <td th:text="${t30005.t_gen_code}"></td>
@@ -223,7 +223,7 @@
 	    //============ //not use==============	
 	    	
 	    	
-	    	
+	   
 	    
 	    
 </script>

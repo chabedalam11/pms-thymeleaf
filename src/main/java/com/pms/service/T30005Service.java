@@ -1,7 +1,6 @@
 package com.pms.service;
 
 import java.util.List;
-import com.pms.model.T30004;
 import com.pms.model.T30005;
 
 public interface T30005Service {

@@ -19,6 +19,6 @@ public interface T30005Repository extends JpaRepository<T30005, Long> {
 	 public List<T30005> findByT_gen_code(@Param("t_gen_code") String t_gen_code);
 	 
 	 
-	 @Query("select coalesce(max(ttradecode), '0') from T30005")
+	 @Query("SELECT max(CAST(ttradecode AS integer)) FROM  T30005")
 	 String getMaxTtradecode();
 }
