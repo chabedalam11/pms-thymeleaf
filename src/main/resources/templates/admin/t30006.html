@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- include header info from another page	 -->
+  <head lang="en" th:replace="fragments/adminheader :: adminheader"> </head>
+  <body class="sidebar-mini fixed">
+  
+  	<!-- this code for loader -->
+		<div class="se-pre-con"></div>
+	<!-- Ends -->
+  
+  
+    <div class="wrapper">
+    
+    <!-- include top nav from another page	 -->
+    <div lang="en" th:replace="fragments/admintopnav :: admintopnav"> </div>
+      
+    <!-- include side nav from another page	 -->
+    <div lang="en" th:replace="fragments/admin_side_nav :: admin_side_nav"> </div>
+      
+      
+      <div class="content-wrapper">
+      <!-- Page Title information -->
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-stethoscope"></i> Drag Master Initialization</h1>
+            <p>[T30006]</p>
+          </div>
+          
+          <div class="alert alert-success" th:if="${msg} != null">
+		   <p th:utext="${msg}"></p>
+		  </div>
+          
+          <div>
+            <ul class="breadcrumb">
+              <li><a href="/admin/t30006"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li>Setup Forms</li>
+              <li><a href="#">Drag Master Initialization</a></li>
+            </ul>
+          </div>
+        </div>
+       <!-- Page Title information -->
+       
+        <!-- Page Body -->
+        <div class="row" id="formBody">
+        
+        
+        <!-- Drag Master form -->
+        <form autocomplete="off" action="#" th:action="@{/admin/saveT30006}" class="form-horizontal"
+					th:object="${t30006}" method="post"  role="form">
+					 
+	        <div class="col-md-6 col-md-offset-3">
+		        <div class="card">
+		          <div class="card-body">
+		          
+				          <!-- field for pass dragmastercode in update Time -->
+				          <div class="form-group">
+						    <label class="col-sm-3 control-label" for="tdrugmastercode">Drag Master Code: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="tdrugmastercode" name="tdrugmastercode" readonly="readonly">
+						    </div>
+						  </div>
+		          	
+						 <!-- generic name -->
+						 <div class="form-group">
+						    <label class="col-sm-3 control-label" for="generic">Generic Name: </label>
+						    <div class="col-sm-8">
+						      <select class="form-control"  id="generic" name="t_gen_code">
+						      <option value="0" selected="selected"></option>
+							  <option th:each="t30004 : ${t30004}" th:value="${t30004.tgencode}" th:text="${t30004.t_lang2_nam}"></option>
+							  </select>
+						    </div>
+						 </div>
+						 
+						 <!-- Trade name -->
+						 <div class="form-group">
+						    <label class="col-sm-3 control-label" for="trade">Trade Name: </label>
+						    <div class="col-sm-8">
+						      <select class="form-control"  id="trade" name="t_trade_code">
+							    <option value="0"></option>
+							    <option th:each="t30005 : ${t30005}" th:value="${t30005.ttradecode}" th:text="${t30005.t_lang2_name}"></option>
+							  </select>
+						    </div>
+						 </div>
+						 
+					
+		          </div>
+		         </div>
+	        </div> 
+	        
+	        <div class="col-md-10 col-md-offset-1">
+		        <div class="card">
+		          <div class="card-body">
+		          
+		          <div class="row">
+		           <!-- side one -->
+		          	<div class="col-md-6">
+		          		<!-- form code -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="formCode">Form Code: </label>
+						    <div class="col-sm-8">
+						      <select class="form-control"  id="formCode" name="t_drug_form_code">
+						      <option value="0" selected="selected"></option>
+							  <option th:each="t30001 : ${t30001}" th:value="${t30001.tdrugformcode}" th:text="${t30001.t_lang2_name}"></option>
+							  </select>
+						    </div>
+						 </div>
+						 
+						 <!-- Route -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="route">Route: </label>
+						    <div class="col-sm-8">
+						      <select class="form-control"  id="route" name="t_route_code">
+						      <option value="0" selected="selected"></option>
+							  <option th:each="t30002 : ${t30002}" th:value="${t30002.tdrugroutecode}" th:text="${t30002.t_lang2_name}"></option>
+							  </select>
+						    </div>
+						 </div>
+						 
+						 <!-- pack and um -->
+			          	<div class="form-group">
+						    
+						    <label class="col-sm-3 control-label" for="pack">Pack Size: </label>
+						    <div class="col-sm-2">
+						      <input class="form-control" type="text" id="pack" name="t_units">
+						    </div>
+						    
+							<label class="col-sm-1 control-label" for="um">UM: </label>
+						    <div class="col-sm-5">
+						      <select class="form-control"  id="um" name="t_bse_um">
+						      <option value="0" selected="selected"></option>
+							  <option th:each="t30036 : ${t30036}" th:value="${t30036.tum}" th:text="${t30036.t_lang2_name}"></option>
+							  </select>
+						    </div>
+						   
+						    
+						 </div>
+		          	</div>
+		          	
+		          	<!-- side two -->
+		          	<div class="col-md-6">
+		          		<!-- Strength -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="strength">Strength: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="strength" name="t_strength">
+						    </div>
+						 </div>
+						 
+						 <!-- OP Price -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for=""opPrice"">OP Price: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="opPrice" name="t_opd_price">
+						    </div>
+						 </div>
+						 
+						 <!-- active flag -->
+			          	<div class="form-group form-group-lg">
+						    <div class="checkbox" style="text-align:center">
+								<input id="cbFlag" type="checkbox" name="t_active_flag" value="1" checked="checked"> active
+							</div>
+						 </div>
+						 
+		          	</div>
+				  </div>
+		         </div>
+		        
+				<div style="text-align:center">
+					<button type="submit" class="btn btn-success">ADD ITEM</button>
+				</div> 
+					
+	          </div>
+	         </div>
+	        
+	        
+        </form>
+		<!-- //Drag Master form -->   
+        
+      </div> 
+       
+          
+        
+        <!-- generic data table-->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th>Drag Master Code</th>
+                      <th>Trade Name</th>
+                      <th>Form Code</th>
+                      <th>Route</th>
+                      <th>Pack Size</th>
+                      <th>Unit Measurement</th>
+                      <th>Strength</th>
+                      <th>Price</th>
+                      <th>Active</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="t30006 : ${t30006}">
+			        <td th:text="${t30006.tdrugmastercode}"></td>
+			        <td th:text="${t30006.t_trade_code}"></td>
+			        <td th:text="${t30006.t_drug_form_code}"></td>
+			        <td th:text="${t30006.t_route_code}"></td>
+			        <td th:text="${t30006.t_units}"></td>
+			        <td th:text="${t30006.t_bse_um}"></td>
+			        <td th:text="${t30006.t_strength}"></td>
+			        <td th:text="${t30006.t_opd_price}"></td>
+			        
+			        <div th:if="${t30006.t_active_flag} == '1'">
+			        	<td style="text-align: center;">
+			        	<input type="checkbox" name="t_active_flag" value="1" checked="checked" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        <div th:if="${t30006.t_active_flag} != '1'">
+			        	<td style="text-align: center;">
+			        	<input  type="checkbox" name="t_active_flag" value="1" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        
+			        <td style="text-align: center;">
+			        <form autocomplete="off" action="#" th:action="@{/admin/deleteT30006}"
+					th:object="${t30006}" method="post"  role="form">
+						<input type="hidden" th:value="${t30006.tdrugmastercode}" name="tdrugmastercode" />
+						<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					</form>
+			        </td>
+				   </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         <!-- //generic data table-->
+        </div>
+       <!-- // Page Body -->
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+
+//=====================document ready function==========================
+	    $(document).ready(function() {
+	        var table = $('#sampleTable').DataTable();
+	         
+	        $('#sampleTable tbody').on('dblclick', 'tr', function () {
+	        	//get table row value
+	            var data = table.row( this ).data();
+	            
+	            //get table cell value
+	            $('#tdrugmastercode').val(data[0]);
+	            $('#trade').val(data[1]).change();
+	            $('#formCode').val(data[2]).change();
+	            $('#route').val(data[3]).change();
+	            $('#pack').val(data[4]);
+	            $('#um').val(data[5]).change();
+	            $('#strength').val(data[6]);
+	            $('#opPrice').val(data[7]);
+	            
+	            //check active flag check or not 
+	           if($(data[8]).is(':checked'))
+	        	    $('#cbFlag').prop('checked', true);    // checked 
+	             else
+	            	$('#cbFlag').prop('checked', false);  // unchecked 
+	            	
+           	   //go to top of the page
+	           $("html, body").animate({ scrollTop: 0 }, "slow");
+	            
+	        } );
+	        
+	      //var for auto search dropdown
+	        var country = [""];
+	        
+	      //auto search for generic
+			$("#generic").select2({
+			  data: country
+			});
+	      
+	       //auto search for trade
+			$("#trade").select2({
+			  data: country
+			}); 
+	       
+	       //auto search for formCode
+			$("#formCode").select2({
+			  data: country
+			}); 
+	       
+	       //auto search for route
+			$("#route").select2({
+			  data: country
+			}); 
+	       
+	       //auto search for um
+			$("#um").select2({
+			  data: country
+			}); 
+	        
+	    } );
+	  //===================== // document ready function==========================
+	    
+	    
+	    //========= when genecric name dropdown item in change=======================
+	    $('#generic').change(function() {
+	        $.ajax({
+	            type:"GET",
+	            url : "/admin/t30006getCitiesForState",
+	            data : { state: $('#generic').val()},
+	            success : function(data) {
+	                $('#trade').empty(); //remove all child nodes
+	               
+	                var firstLine = '<option value=0></option>';
+	                $('#trade').append(firstLine);
+	                for(var i = 0; i < data.length; i++){
+	                    var newOption = $('<option value='+data[i].ttradecode+'>'+data[i].t_lang2_name+'</option>');
+	                    $('#trade').append(newOption);
+	                }  
+	                
+	            },
+	            error: function() {
+	                alert('Error occured');
+	            }
+	        });
+	    });
+	    
+	  //========= // when genecric name dropdown item in change=======================
+</script>

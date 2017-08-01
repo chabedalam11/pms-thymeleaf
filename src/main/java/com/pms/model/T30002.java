@@ -1,10 +1,14 @@
 package com.pms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "t30002")
@@ -18,6 +22,9 @@ public class T30002 {
 	private Date t_upd_date;
 	private String t_lang1_name;
 	private String t_lang2_name;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "t30002")
+	private Set<T30006> user = new HashSet<>();
 	
 	
 	public String getTdrugroutecode() {

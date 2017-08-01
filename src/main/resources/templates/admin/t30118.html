@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+  <!-- include header info from another page	 -->
+  <head lang="en" th:replace="fragments/adminheader :: adminheader"> </head>
+  <body class="sidebar-mini fixed">
+  
+  	<!-- this code for loader -->
+		<div class="se-pre-con"></div>
+	<!-- Ends -->
+  
+  
+    <div class="wrapper">
+    
+    <!-- include top nav from another page	 -->
+    <div lang="en" th:replace="fragments/admintopnav :: admintopnav"> </div>
+      
+    <!-- include side nav from another page	 -->
+    <div lang="en" th:replace="fragments/admin_side_nav :: admin_side_nav"> </div>
+      
+      
+      <div class="content-wrapper">
+      <!-- Page Title information -->
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-stethoscope"></i> Vendor Code Initialization</h1>
+            <p>[T30118]</p>
+          </div>
+          <div>
+            <ul class="breadcrumb">
+           	  <li><a href="/admin/t30118"><i class="fa fa-refresh" aria-hidden="true"></i></a></li>
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li>Setup Forms</li>
+              <li><a href="#">Vendor Code Initialization</a></li>
+            </ul>
+          </div>
+        </div>
+       <!-- Page Title information -->
+       
+        <!-- Page Body -->
+        <div class="row" id="formBody">
+       <!-- Vendor form -->
+        <form autocomplete="off" action="#" th:action="@{/admin/saveT30118}" class="form-horizontal"
+					th:object="${t30118}" method="post"  role="form">
+					 
+	        <div class="col-md-6 col-md-offset-3">
+		        <div class="card">
+		          <div class="card-body">
+		          
+				          <!-- field for pass Vendor in update Time -->
+				          <div class="form-group">
+						    <label class="col-sm-3 control-label" for="tvendorcode">Vendor Code: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="tvendorcode" name="tvendorcode" readonly="readonly">
+						    </div>
+						  </div>
+						  
+						<!-- Name -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="t_lang2_name">Name: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="t_lang2_name" name="t_lang2_name">
+						    </div>
+						 </div>
+						 
+						 <!-- Address  -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="t_vendor_addr_1">Address: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="t_vendor_addr_1" name="t_vendor_addr_1">
+						    </div>
+						 </div>
+						 
+						 <!-- Phone -->
+			          	<div class="form-group">
+						    <label class="col-sm-3 control-label" for="t_vendor_contact">Phone: </label>
+						    <div class="col-sm-8">
+						      <input class="form-control" type="text" id="t_vendor_contact" name="t_vendor_contact">
+						    </div>
+						 </div>
+						 
+						  <!-- active flag -->
+			          	<div class="form-group form-group-lg">
+						    <div class="checkbox" style="text-align:center">
+								<input id="t_vendor_active_flag_y" type="checkbox" name="t_vendor_active_flag_y" value="1" checked="checked"> active
+							</div>
+						 </div>
+						 
+						 <div style="text-align:center">
+							<button type="submit" class="btn btn-success">ADD ITEM</button>
+							<button type="reset" class="btn btn-danger">CLEAR</button>
+						</div> 
+		          	
+					
+		          </div>
+		         </div>
+	        </div> 
+        </form>
+		<!-- //Vendor form -->        
+        
+        <!-- Vendor data table-->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th>Vendor Code</th>
+                      <th>Vendor Name</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Active Flag</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="t30118 : ${t30118}">
+			        <td th:text="${t30118.tvendorcode}"></td>
+			        <td th:text="${t30118.t_lang2_name}"></td>
+			        <td th:text="${t30118.t_vendor_addr_1}"></td>
+			        <td th:text="${t30118.t_vendor_contact}"></td>
+			        
+			        <div th:if="${t30118.t_vendor_active_flag_y} == '1'">
+			        	<td style="text-align: center;">
+			        	<input type="checkbox" name="t_vendor_active_flag_y" value="1" checked="checked" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        <div th:if="${t30118.t_vendor_active_flag_y} != '1'">
+			        	<td style="text-align: center;">
+			        	<input  type="checkbox" name="t_vendor_active_flag_y" value="1" onclick="return false;"> active
+			        	</td>
+			        </div>
+			        
+			        <td style="text-align: center;">
+			        <form autocomplete="off" action="#" th:action="@{/admin/deleteT30118}"
+					th:object="${t30118}" method="post"  role="form">
+						<input type="hidden" th:value="${t30118.tvendorcode}" name="tvendorcode" />
+						<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+					</form>
+			        </td>
+				   </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         <!-- //drug form data table-->
+        </div>
+       <!-- // Page Body -->
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+	    $(document).ready(function() {
+	        var table = $('#sampleTable').DataTable();
+	         
+	        $('#sampleTable tbody').on('dblclick', 'tr', function () {
+	        	//get table row value
+	            var data = table.row( this ).data();
+	            
+	            //get table cell value
+	            $('#tvendorcode').val(data[0]);
+	            $('#t_lang2_name').val(data[1]);
+	            $('#t_vendor_addr_1').val(data[2]);
+	            $('#t_vendor_contact').val(data[3]);
+	            
+	            //check active flag check or not 
+	           if($(data[4]).is(':checked'))
+	        	    $('#t_vendor_active_flag_y').prop('checked', true);    // checked 
+	             else
+	            	$('#t_vendor_active_flag_y').prop('checked', false);  // unchecked 
+	            	 
+           	   //go to top of the page
+	           $("html, body").animate({ scrollTop: 0 }, "slow");
+	            
+	        } );
+	    } );
+</script>

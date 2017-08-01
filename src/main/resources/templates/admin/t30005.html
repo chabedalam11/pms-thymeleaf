@@ -95,9 +95,9 @@
                       <th>Trade Code</th>
                       <th>Trade Name</th>
                       <th>Generic Code</th>
-                      <th>Manufacture Code</th>
+                      <th>Manufac. Code</th>
                       <th>Active Flag</th>
-                      <th>Action</th>
+                      <th>Action Goes Here</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -119,10 +119,17 @@
 			        </div>
 			        
 			        <td style="text-align: center;">
+			        <!-- for delete -->
 			        <form autocomplete="off" action="#" th:action="@{/admin/deleteT30005}"
+					th:object="${t30005}" method="post"  role="form" style="float: left;clear: left;">
+						<input type="hidden" th:value="${t30005.ttradecode}" name="ttradecode" />
+						<button type="submit"><i class="fa fa-trash" aria-hidden="true" title="delete trade infomation"></i></button>
+					</form>
+					<!-- for go to dragmasterPage -->
+					<form autocomplete="off" action="#" th:action="@{/admin/goDragMasterPage}"
 					th:object="${t30005}" method="post"  role="form">
 						<input type="hidden" th:value="${t30005.ttradecode}" name="ttradecode" />
-						<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+						<button type="submit"><i class="fa fa-plus-square-o" aria-hidden="true" title="show drag master info"></i></button>
 					</form>
 			        </td>
 				   </tr>
